@@ -1,15 +1,17 @@
-package com.wx.wxgateway;
+package com.wx.wxmonitor;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class WxGatewayApplication {
+@EnableAdminServer
+public class WxMonitorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WxGatewayApplication.class, args);
+        SpringApplication.run(WxMonitorApplication.class, args);
     }
 
 }

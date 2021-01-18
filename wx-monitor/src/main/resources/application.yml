@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: wx-monitor
+#    cloud:
+#      nacos:
+#        discovery:
+#          server-addr:
+
+server:
+    port: 8764 #启动端口
+
+
+

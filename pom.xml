@@ -19,6 +19,7 @@
 
     <modules>
         <module>wx-gateway</module>
+        <module>wx-monitor</module>
     </modules>
 
     <properties>
@@ -37,9 +38,13 @@
         <fastjson.version>1.2.47</fastjson.version>
         <!--spring boot 版本-->
         <spring.boot.vserion>2.3.3.RELEASE</spring.boot.vserion>
+        <!--spring cloud 版本-->
         <spring.cloud.alibaba.vserion>2.2.1.RELEASE</spring.cloud.alibaba.vserion>
+        <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
         <!-- spring版本号 -->
         <spring.version>5.2.8.RELEASE</spring.version>
+        <!--监控版本-->
+        <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
         <!-- 环境配置 -->
         <spring.profiles.active>dev</spring.profiles.active>
     </properties>
@@ -62,28 +67,46 @@
 
     <!--maven 镜像-->
     <repositories>
-        <!--<repository>-->
-            <!--<id>alimaven</id>-->
-            <!--<name>aliyun maven</name>-->
-            <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
-            <!--<releases>-->
-                <!--<enabled>true</enabled>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-                <!--<enabled>false</enabled>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-        <!--<repository>-->
-            <!--<id>spring-snapshots</id>-->
-            <!--<url>http://repo.spring.io/snapshot</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>true</enabled>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-        <!--<repository>-->
-            <!--<id>spring-milestones</id>-->
-            <!--<url>http://repo.spring.io/milestone</url>-->
-        <!--</repository>-->
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+        <repository>
+            <id>oss</id>
+            <name>oss</name>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
     </repositories>
 
 
@@ -107,6 +130,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring.cloud.alibaba.vserion}</version>
@@ -119,6 +149,7 @@
                 <version>${spring.boot.vserion}</version>
             </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <build>

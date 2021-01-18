@@ -9,9 +9,22 @@ spring:
     # 环境 dev|test|prod
     profiles:
         active: ${spring.profiles.active}
+
+#    cloud:
+#      nacos:
+#        discovery:
+#          server-addr:
 logging:
   config: classpath:logback-spring.xml
   level:
     dao: debug
     org:
       mybatis: debug
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        exclude: heapdump,dump,threaddump,configprops,env
+
+

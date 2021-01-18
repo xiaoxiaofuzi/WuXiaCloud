@@ -1,0 +1,17 @@
+# Tomcat
+server:
+    port: 8001
+    tomcat:
+        threads:
+          max: 1000
+          min-spare: 30
+spring:
+    # 环境 dev|test|prod
+    profiles:
+        active: ${spring.profiles.active}
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    dao: debug
+    org:
+      mybatis: debug

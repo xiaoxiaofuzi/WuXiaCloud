@@ -39,7 +39,7 @@
         <!--spring boot 版本-->
         <spring.boot.vserion>2.3.3.RELEASE</spring.boot.vserion>
         <!--spring cloud 版本-->
-        <spring.cloud.alibaba.vserion>2.2.1.RELEASE</spring.cloud.alibaba.vserion>
+        <spring.cloud.alibaba.vserion>2.2.4.RELEASE</spring.cloud.alibaba.vserion>
         <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
         <!-- spring版本号 -->
         <spring.version>5.2.8.RELEASE</spring.version>
@@ -205,5 +205,15 @@
             </plugin>
         </plugins>
     </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

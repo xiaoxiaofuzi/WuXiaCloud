@@ -1,0 +1,35 @@
+server:
+  port: 8764 #启动端口
+
+spring:
+# 环境 dev|test|prod
+  profiles:
+    active: ${spring.profiles.active}
+  application:
+    name: wx-monitor
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+         # 配置文件格式
+        file-extension: yml
+        shared-configs[0]:
+         data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      discovery:
+        server-addr: 127.0.0.1:8848
+  security:
+    user:
+      name: "admin"
+      password: "koala"
+  boot:
+    admin:
+      ui:
+        title: WX服务状态监控
+
+
+
+
+
+
+
+

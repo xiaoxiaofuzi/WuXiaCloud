@@ -8,7 +8,7 @@
 
 | Spring Cloud Alibaba Version | Sentinel Version | Nacos Version | Spring Cloud Version    | Spring Boot Version | Seata Version |
 | ---------------------------- | ---------------- | ------------- | ----------------------- | ------------------- | ------------- |
-| 2.2.4.RELEASE                | 1.8.0            | 1.4.1         | Spring Cloud Hoxton.SR8 | 2.3.3.RELEASE       | 1.3.0         |
+| 2.2.4.RELEASE                | 1.8.0            | 1.4.1         | Spring Cloud Hoxton.SR8 | 2.3.2.RELEASE       | 1.3.0         |
 
 ## Nacos Config
 

@@ -37,7 +37,7 @@
         <!--fastjson 版本-->
         <fastjson.version>1.2.47</fastjson.version>
         <!--spring boot 版本-->
-        <spring.boot.vserion>2.3.3.RELEASE</spring.boot.vserion>
+        <spring.boot.vserion>2.3.2.RELEASE</spring.boot.vserion>
         <!--spring cloud 版本-->
         <spring.cloud.alibaba.vserion>2.2.4.RELEASE</spring.cloud.alibaba.vserion>
         <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
@@ -86,21 +86,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>spring-milestones</id>
-            <url>http://repo.spring.io/milestone</url>
-        </repository>
-        <repository>
             <id>oss</id>
             <name>oss</name>
             <url>https://oss.sonatype.org/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </repository>
         <repository>
             <id>sonatype-nexus-snapshots</id>

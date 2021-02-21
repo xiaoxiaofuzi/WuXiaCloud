@@ -23,21 +23,14 @@ public class WxAuthGlobalFilter implements GlobalFilter,Ordered {
         Map<String, Object> attributes = exchange.getAttributes();
         log.info(JSON.toJSONString(attributes));
         log.info(exchange.getAttribute(RequestBodyRoutePredicateFactory.REQUEST_BODY_ATTR));
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         ServerHttpRequest request = exchange.getRequest();
         // 获取当前网关访问的URI
         String requestUri = request.getPath().pathWithinApplication().value();
 
         String path = exchange.getRequest().getURI().getPath();
 
-        log.info(path);
-        log.info(requestUri);
+        log.info("path:"+path);
+        log.info("uri:"+requestUri);
 
         return chain.filter(exchange);
     }

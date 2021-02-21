@@ -20,6 +20,7 @@
     <modules>
         <module>wx-gateway</module>
         <module>wx-monitor</module>
+        <module>wx-modules</module>
     </modules>
 
     <properties>

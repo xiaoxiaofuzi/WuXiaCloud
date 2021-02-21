@@ -39,7 +39,7 @@ spring:
           enabled: false
         transport:
           # 控制台地址
-          #java -Dserver.port=8718 -Dcsp.sentinel.dashboard.server=localhost:8718 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar
+          #java -Dserver.port=8718 -Dcsp.sentinel.dashboard.server=localhost:8718 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.0.jar
           dashboard: 127.0.0.1:8718
         # nacos配置持久化
         datasource:

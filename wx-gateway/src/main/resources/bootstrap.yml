@@ -28,7 +28,7 @@ spring:
           shared-configs[0]:
            data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         discovery:
-          server-addr: 127.0.0.1:8848
+          server-addr: 10.200.1.27:8848
           metadata:
             user.name: "admin"
             user.password: "koala"
@@ -45,7 +45,7 @@ spring:
         datasource:
           ds1:
             nacos:
-              server-addr: 127.0.0.1:8848
+              server-addr: 10.200.1.27:8848
               dataId: sentinel-wx-gateway
               groupId: DEFAULT_GROUP
               data-type: json

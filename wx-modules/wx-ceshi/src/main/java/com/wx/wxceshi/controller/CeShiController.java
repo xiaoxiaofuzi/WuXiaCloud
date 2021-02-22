@@ -15,7 +15,7 @@ public class CeShiController {
     @Value("${server.port}")
     private String port;
 
-    @SentinelResource(value="getPort",blockHandler="handleException",blockHandlerClass=ExceptionUtil.class)
+//    @SentinelResource(value="getPort",blockHandler="handleException",blockHandlerClass=ExceptionUtil.class)
     @GetMapping("/getPort")
     public String getPort(){
         return "当前微服务端口号："+port;

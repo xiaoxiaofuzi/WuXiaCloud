@@ -33,6 +33,8 @@ public class WxGatewayApplication extends SpringBootServletInitializer {
         log.info("wx.dev.config:{}",s2);
         String s = EnvironmentUtils.searchByKey("gateway.config");
         log.info("gateway.config:{}",s);
+        String s3 = EnvironmentUtils.searchByKey("ceshi.config");
+        log.info("ceshi.config:{}",s3);
     }
 
 }

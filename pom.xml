@@ -21,9 +21,11 @@
         <module>wx-gateway</module>
         <module>wx-monitor</module>
         <module>wx-modules</module>
+        <module>wx-common</module>
     </modules>
 
     <properties>
+        <wx.version>1.0-SNAPSHOT</wx.version>
         <!--日志地址-->
         <log.path>logs/${project.name}</log.path>
         <!--项目名称-->
@@ -124,6 +126,11 @@
     <!--依赖管理，用于管理spring-cloud的依赖-->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.wx</groupId>
+                <artifactId>wx-common-core</artifactId>
+                <version>${wx.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

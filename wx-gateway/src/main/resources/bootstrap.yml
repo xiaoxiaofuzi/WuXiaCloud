@@ -12,6 +12,7 @@ spring:
     #可以重写bean
     main:
       allow-bean-definition-overriding: true
+#      lazy-initialization: true
     application:
       name: wx-gateway
     redis:

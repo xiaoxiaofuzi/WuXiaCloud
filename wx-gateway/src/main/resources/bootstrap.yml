@@ -5,7 +5,11 @@ server:
         threads:
           max: 1000
           min-spare: 30
+#        connection-timeout: 20000
+
 spring:
+#    devtools:
+#      add-properties: false
     # 环境 dev|test|prod
     profiles:
       active: ${spring.profiles.active}
@@ -17,6 +21,14 @@ spring:
       name: wx-gateway
     redis:
       host: 10.200.1.32
+      database: 10
+      # 配置使用Lettuce连接池
+      lettuce:
+         pool:
+           max-active: 8
+           max-idle: 8
+           min-idle: -1
+
     cloud:
       nacos:
         config:
@@ -30,14 +42,16 @@ spring:
            data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         discovery:
           server-addr: 10.200.1.27:8848
-          metadata:
-            user.name: "admin"
-            user.password: "koala"
+#          metadata:
+#            user.name: "admin"
+#            user.password: "koala"
       sentinel:
         # 取消控制台懒加载
         eager: true
         filter:
           enabled: false
+        log:
+          dir: ${sentinel.log.path}
         transport:
           # 控制台地址
           #java -Dserver.port=8718 -Dcsp.sentinel.dashboard.server=localhost:8718 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.0.jar

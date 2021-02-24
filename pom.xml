@@ -27,7 +27,8 @@
     <properties>
         <wx.version>1.0-SNAPSHOT</wx.version>
         <!--日志地址-->
-        <log.path>logs/${project.name}</log.path>
+        <log.path>logs/${project.name}/sys/</log.path>
+        <sentinel.log.path>logs/${project.name}/sentinel/</sentinel.log.path>
         <!--项目名称-->
         <module.name>${project.artifactId}</module.name>
         <jar.dic>${project.basedir}</jar.dic>
@@ -129,6 +130,11 @@
             <dependency>
                 <groupId>com.wx</groupId>
                 <artifactId>wx-common-core</artifactId>
+                <version>${wx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wx</groupId>
+                <artifactId>wx-common-cache</artifactId>
                 <version>${wx.version}</version>
             </dependency>
             <dependency>

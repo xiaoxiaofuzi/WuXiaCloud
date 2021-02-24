@@ -16,7 +16,17 @@
     <description>
         wx-modules公共模块
     </description>
+
+    <properties>
+        <redisson.version>3.7.1</redisson.version>
+        <caffeine.version>2.8.5</caffeine.version>
+    </properties>
+
+
     <modules>
         <module>wx-common-core</module>
+        <module>wx-common-cache</module>
     </modules>
+
+
 </project>

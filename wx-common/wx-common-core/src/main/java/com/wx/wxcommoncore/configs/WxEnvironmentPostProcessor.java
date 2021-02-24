@@ -28,8 +28,8 @@ import java.util.Properties;
   **/
 public class WxEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-    private static final String DEFAULT_SEARCH_SUFFIX = "classpath*:config/";
-    private static final String DEFAULT_SEARCH_PREFIXES = "wx*.properties";
+    private static final String DEFAULT_SEARCH_PREFIXES = "classpath*:config/";
+    private static final String DEFAULT_SEARCH_SUFFIX = "wx*.properties";
 
     private int order = ConfigFileApplicationListener.DEFAULT_ORDER + 2;
 
@@ -50,13 +50,13 @@ public class WxEnvironmentPostProcessor implements EnvironmentPostProcessor, Ord
     private Properties getConfig(String[] profiles) {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         List<Resource> resourceList = new ArrayList<>();
-        addResources(resolver, resourceList, DEFAULT_SEARCH_SUFFIX + DEFAULT_SEARCH_PREFIXES);
+        addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + DEFAULT_SEARCH_SUFFIX);
         if (profiles != null) {
             for (String p : profiles) {
                 if (!StringUtils.isEmpty(p)) {
                     p = p + "/";
                 }
-                addResources(resolver, resourceList, DEFAULT_SEARCH_SUFFIX + p + DEFAULT_SEARCH_PREFIXES);
+                addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + p + DEFAULT_SEARCH_SUFFIX);
             }
         }
         try {
@@ -72,11 +72,12 @@ public class WxEnvironmentPostProcessor implements EnvironmentPostProcessor, Ord
     /**
      * 加载配置文件
      */
-    private void addResources(PathMatchingResourcePatternResolver resolver, List<Resource> resouceList, String path) {
+    private void addResources(PathMatchingResourcePatternResolver resolver, List<Resource> resourceList, String path) {
         try {
             Resource[] resources = resolver.getResources(path);
-            resouceList.addAll(Arrays.asList(resources));
+            resourceList.addAll(Arrays.asList(resources));
         } catch (Exception e) {
+
         }
     }
 

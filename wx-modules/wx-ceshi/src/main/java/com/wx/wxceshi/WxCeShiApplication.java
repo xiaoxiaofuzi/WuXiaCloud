@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.cloud.client.SpringCloudApplication;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -25,13 +24,13 @@ public class WxCeShiApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(WxCeShiApplication.class, args);
-        String s1 = EnvironmentUtils.searchByKey("wx.config");
+        String s1 = EnvironmentUtils.getString("wx.config");
         log.info("wx.config:{}",s1);
-        String s2 = EnvironmentUtils.searchByKey("wx.dev.config");
+        String s2 = EnvironmentUtils.getString("wx.dev.config");
         log.info("wx.dev.config:{}",s2);
-        String s = EnvironmentUtils.searchByKey("gateway.config");
+        String s = EnvironmentUtils.getString("gateway.config");
         log.info("gateway.config:{}",s);
-        String s3 = EnvironmentUtils.searchByKey("ceshi.config");
+        String s3 = EnvironmentUtils.getString("ceshi.config");
         log.info("ceshi.config:{}",s3);
     }
 

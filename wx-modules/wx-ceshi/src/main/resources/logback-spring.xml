@@ -165,7 +165,8 @@
     <!-- 4. 最终的策略 -->
     <!-- 4.1 开发环境:打印控制台-->
     <springProfile name="dev">
-        <logger name="com.wx.wxgateway" level="info"/>
+        <logger name="com.wx.wxceshi" level="info"/>
+        <logger name="com.wx.wxcommoncache" level="debug"/>
     </springProfile>
 
     <root level="info">

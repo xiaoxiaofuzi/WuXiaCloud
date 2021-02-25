@@ -4,18 +4,18 @@
     <parent>
         <groupId>com.wx</groupId>
         <artifactId>wx-cloud</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <modules>
+    <packaging>pom</packaging>
 
+    <modules>
         <module>wx-ceshi</module>
     </modules>
 
     <artifactId>wx-modules</artifactId>
-    <packaging>pom</packaging>
+
 
     <description>
         wx-modules业务模块

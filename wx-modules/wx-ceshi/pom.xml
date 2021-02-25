@@ -5,7 +5,7 @@
     <parent>
         <artifactId>wx-modules</artifactId>
         <groupId>com.wx</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +15,6 @@
     <name>wx-ceshi</name>
     <description>武侠测试</description>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -108,19 +107,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>${maven.compile.source}</source>
-                    <target>${maven.compile.target}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <testIncludes>
-                        <testInclude>none</testInclude>
-                    </testIncludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>

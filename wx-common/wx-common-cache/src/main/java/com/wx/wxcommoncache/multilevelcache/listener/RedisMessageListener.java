@@ -38,7 +38,7 @@ public class RedisMessageListener extends MessageListenerAdapter {
         }
         // 解析订阅发布的信息，获取缓存的名称和缓存的key
         String ms = new String(message.getBody());
-        log.info("redis消息订阅者接收到频道【{}】发布的消息。消息内容：{}", channelTopic.getChannelTopicStr(), message.toString());
+        log.debug("redis消息订阅者接收到频道【{}】发布的消息。消息内容：{}", channelTopic.getChannelTopicStr(), message.toString());
         @SuppressWarnings("unchecked")
         MultiLevelCacheMessage multiLevelCacheMessage = JSON.parseObject(ms, MultiLevelCacheMessage.class);
         String cacheName = multiLevelCacheMessage.getCacheName();
@@ -58,17 +58,17 @@ public class RedisMessageListener extends MessageListenerAdapter {
                 case REDIS_CACHE_DELETE_TOPIC:
                     // 获取一级缓存，并删除一级缓存数据
                     ((MultiLevelCache) cache).getCaffeineCache().evict(key);
-                    log.info("删除一级缓存{}数据,key:{}", cacheName, key.toString());
+                    log.debug("删除一级缓存{}数据,key:{}", cacheName, key.toString());
                     break;
 
                 case REDIS_CACHE_CLEAR_TOPIC:
                     // 获取一级缓存，并删除一级缓存数据
                     ((MultiLevelCache) cache).getCaffeineCache().clear();
-                    log.info("清除一级缓存{}数据", cacheName);
+                    log.debug("清除一级缓存{}数据", cacheName);
                     break;
 
                 default:
-                    log.info("接收到没有定义的订阅消息频道数据");
+                    log.debug("接收到没有定义的订阅消息频道数据");
                     break;
             }
         }

@@ -11,14 +11,28 @@ spring:
     application:
       name: wx-ceshi
     redis:
-      host: 10.200.1.32
       database: 10
+      timeout: PT10S
+      #单机配置
+      host: 10.200.1.32
+      port: 6379
+      #主从哨兵设置
+#      sentinel:
+#        master:
+#        nodes:
+      #集群配置
+#      cluster:
+#        nodes:
       # 配置使用Lettuce连接池
       lettuce:
         pool:
           max-active: 8
           max-idle: 8
           min-idle: -1
+          max-wait: PT10S
+
+
+
 
     cloud:
       nacos:

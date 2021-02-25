@@ -1,6 +1,7 @@
 package com.wx.wxcommoncache.config;
 
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
+import com.wx.wxcommoncache.service.impl.RedisHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -24,6 +25,13 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(valueSerializer);
 //        redisTemplate.setEnableTransactionSupport(false);
         return redisTemplate;
+    }
+
+
+
+    @Bean
+    public RedisHelper redisHelper(RedisTemplate<Serializable, Serializable> redisTemplate){
+        return new RedisHelper(redisTemplate);
     }
 
 }

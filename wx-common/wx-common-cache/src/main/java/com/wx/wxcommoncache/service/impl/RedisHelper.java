@@ -15,8 +15,7 @@ import java.util.Set;
 /**
  * Redis缓存辅助类
  *
- * @author mysd
- * @version 2018年4月2日 下午4:17:22
+ * @author wx-
  */
 @Slf4j
 public final class RedisHelper implements CacheManager {

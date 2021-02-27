@@ -1,0 +1,35 @@
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        pool:
+          max-idle-time: 5000
+          max-connections: 30
+      loadbalancer:
+        use404: false
+      default-filters:
+         - DedupeResponseHeader=Access-Control-Allow-Origin
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+      discovery:
+        locator:
+          #是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了
+          lowerCaseServiceId: true
+          #表明gateway开启服务注册和发现的功能，并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，这个router将以服务名开头的请求路径转发到对应的服务
+          enabled: true
+      routes:
+        # 测试
+        - id: wx-ceshi
+          uri: lb://wx-ceshi
+          predicates:
+            - RequestBody=POST,PUT
+            - Path=/ceshi/**,/ceshi1/**
+          filters:
+            - CeShi=24,gh,男
+            - StripPrefix=1

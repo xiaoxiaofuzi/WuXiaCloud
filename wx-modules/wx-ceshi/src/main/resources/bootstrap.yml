@@ -14,7 +14,8 @@ spring:
       database: 10
       timeout: PT10S
       #单机配置
-      host: 10.200.1.32
+      host: 127.0.0.1
+#      host: 10.200.1.32
       port: 6379
       #主从哨兵设置
 #      sentinel:
@@ -37,8 +38,8 @@ spring:
     cloud:
       nacos:
         config:
-#          server-addr: 127.0.0.1:8848
-          server-addr: 10.200.1.27:8848
+          server-addr: 127.0.0.1:8848
+#          server-addr: 10.200.1.27:8848
            # 配置文件格式
           file-extension: yml
           extension-configs[0]:
@@ -46,7 +47,8 @@ spring:
           shared-configs[0]:
            data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         discovery:
-          server-addr: 10.200.1.27:8848
+          server-addr: 127.0.0.1:8848
+          #          server-addr: 10.200.1.27:8848
       sentinel:
         # 取消控制台懒加载
         eager: true

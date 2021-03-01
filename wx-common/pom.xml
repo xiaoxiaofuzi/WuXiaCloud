@@ -27,6 +27,7 @@
     <modules>
         <module>wx-common-core</module>
         <module>wx-common-cache</module>
+        <module>wx-common-datasource</module>
     </modules>
 
 

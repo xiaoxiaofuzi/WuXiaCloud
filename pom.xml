@@ -49,6 +49,13 @@
         <spring.version>5.2.8.RELEASE</spring.version>
         <!--监控版本-->
         <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
+        <!-- 数据库 -->
+        <mysql.version>8.0.11</mysql.version>
+        <!--多数据源-->
+        <dynamic.boot.version>3.3.1</dynamic.boot.version>
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <!--druid 版本-->
+        <druid.boot.vserion>1.2.3</druid.boot.vserion>
         <!-- 环境配置 -->
         <spring.profiles.active>dev</spring.profiles.active>
     </properties>
@@ -138,6 +145,11 @@
                 <version>${wx.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.wx</groupId>
+                <artifactId>wx-common-datasource</artifactId>
+                <version>${wx.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud-version}</version>
@@ -155,6 +167,26 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.vserion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.boot.vserion}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
         </dependencies>
 

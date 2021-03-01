@@ -1,6 +1,7 @@
 package com.wx.wxcommoncore.configs;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.config.ConfigFileApplicationListener;
 import org.springframework.boot.env.EnvironmentPostProcessor;
@@ -30,6 +31,7 @@ public class WxEnvironmentPostProcessor implements EnvironmentPostProcessor, Ord
 
     private static final String DEFAULT_SEARCH_PREFIXES = "classpath*:config/";
     private static final String DEFAULT_SEARCH_SUFFIX = "wx*.properties";
+    private static final String YML_SEARCH_SUFFIX = "wx*.yml";
 
     private int order = ConfigFileApplicationListener.DEFAULT_ORDER + 2;
 
@@ -44,21 +46,40 @@ public class WxEnvironmentPostProcessor implements EnvironmentPostProcessor, Ord
         //获取激活的版本
         String[] profiles = environment.getActiveProfiles();
         Properties props = getConfig(profiles);
+        Properties ymlProps = getConfigByYml(profiles);
+        props.putAll(ymlProps);
         propertySources.addLast(new PropertiesPropertySource("wxEnvironment", props));
     }
 
-    private Properties getConfig(String[] profiles) {
+    private Properties getConfigByYml(String[] profiles) {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         List<Resource> resourceList = new ArrayList<>();
-        addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + DEFAULT_SEARCH_SUFFIX);
+        addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + YML_SEARCH_SUFFIX);
+        getConfigBySuffix(profiles, resolver, resourceList, YML_SEARCH_SUFFIX);
+        YamlPropertiesFactoryBean config = new YamlPropertiesFactoryBean();
+        config.setResources(resourceList.toArray(new Resource[]{}));
+        config.afterPropertiesSet();
+        return config.getObject();
+
+    }
+
+    private void getConfigBySuffix(String[] profiles, PathMatchingResourcePatternResolver resolver, List<Resource> resourceList, String ymlSearchSuffix) {
         if (profiles != null) {
             for (String p : profiles) {
                 if (!StringUtils.isEmpty(p)) {
                     p = p + "/";
                 }
-                addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + p + DEFAULT_SEARCH_SUFFIX);
+                addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + p + ymlSearchSuffix);
             }
         }
+    }
+
+
+    private Properties getConfig(String[] profiles) {
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        List<Resource> resourceList = new ArrayList<>();
+        addResources(resolver, resourceList, DEFAULT_SEARCH_PREFIXES + DEFAULT_SEARCH_SUFFIX);
+        getConfigBySuffix(profiles, resolver, resourceList, DEFAULT_SEARCH_SUFFIX);
         try {
             PropertiesFactoryBean config = new PropertiesFactoryBean();
             config.setLocations(resourceList.toArray(new Resource[]{}));
@@ -68,6 +89,8 @@ public class WxEnvironmentPostProcessor implements EnvironmentPostProcessor, Ord
             throw new RuntimeException(e);
         }
     }
+
+
 
     /**
      * 加载配置文件

@@ -1,8 +1,6 @@
 package com.wx.wxceshi.service.impl;
 
 
-import com.baomidou.dynamic.datasource.annotation.DS;
-import com.baomidou.dynamic.datasource.annotation.Slave;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wx.wxceshi.entity.User;
 import com.wx.wxceshi.mapper.UserMapper;
@@ -20,7 +18,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    @DS("slave")
     public List<User> selectSlaveUsers() {
         return baseMapper.selectList(null);
     }
@@ -31,19 +28,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    @DS("slave")
     public List<User> selectLambdaSlaveUsers() {
         return this.lambdaQuery().list();
     }
 
     @Override
-    @Slave
     public List<User> selectSlaveAnnotationUsers() {
         return this.lambdaQuery().list();
     }
 
     @Override
-    @DS("slave")
     public void addUser(User user) {
         baseMapper.insert(user);
     }

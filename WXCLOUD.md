@@ -1,6 +1,6 @@
 
 
-## spring cloud Gateway
+# spring cloud Gateway
 
  [官方文档](https://docs.spring.io/spring-cloud-gateway/docs/2.2.6.RELEASE/reference/html/)
 
@@ -228,7 +228,7 @@ https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/appendix
 
 
 
-## spring cloud alibaba
+# spring cloud alibaba
 
 [组件版本关系](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
@@ -350,4 +350,51 @@ management:
 | `接入点`              | `spring.cloud.nacos.discovery.enpoint`           | `UTF-8`                      | `地域的某个服务的入口域名，通过此域名可以动态地拿到服务端地址` |
 | `是否集成Ribbon`      | `ribbon.nacos.enabled`                           | `true`                       | `一般都设置成true即可`                                       |
 | `是否开启Nacos Watch` | `spring.cloud.nacos.discovery.watch.enabled`     | `true`                       | `可以设置成false来关闭 watch`                                |
+
+
+
+# Wx-Cache模块
+
+缓存模块，使用spring缓存，实现方式有两种：
+
+- 单缓存（redis）
+- 多级缓存（caffeine+redis）
+
+
+
+# Wx-DataSource模块
+
+数据源模块，使用 druid 数据源。插件使用：
+
+1. [mybatis-plus](https://mybatis.plus/guide/)
+2. [dynamic-datasource](https://dynamic-datasource.com/guide/)
+
+## pom
+
+```xml
+<!--mysql连接-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+</dependency>
+
+<!--druid-->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid-spring-boot-starter</artifactId>
+</dependency>
+
+<!--多数据源-->
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+<!--mybatis-plus-->
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>mybatis-plus-boot-starter</artifactId>
+</dependency>
+```
 

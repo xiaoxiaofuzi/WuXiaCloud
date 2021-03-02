@@ -1,6 +1,8 @@
 package com.wx.wxceshi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.wx.wxceshi.entity.User;
 import com.wx.wxceshi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +59,10 @@ public class CeShiController {
 
     @GetMapping("/getUserS")
     public String getUserS(){
-        return JSON.toJSONString(userService.selectLambdaSlaveUsers());
+        PageHelper.startPage(1,1);
+        Page<User> users = (Page<User>)userService.selectLambdaSlaveUsers();
+        log.info(JSON.toJSONString(users));
+        return JSON.toJSONString(users.getResult());
     }
 
 

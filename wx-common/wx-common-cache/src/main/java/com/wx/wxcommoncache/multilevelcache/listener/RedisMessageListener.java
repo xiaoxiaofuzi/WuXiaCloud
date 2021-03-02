@@ -5,24 +5,19 @@ import com.wx.wxcommoncache.multilevelcache.MultiLevelCache;
 import com.wx.wxcommoncache.multilevelcache.enums.ChannelTopicEnum;
 import com.wx.wxcommoncache.multilevelcache.pojo.MultiLevelCacheMessage;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.transaction.TransactionAwareCacheDecorator;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
-import org.springframework.stereotype.Component;
 
 /**
  * redis消息的订阅者
  *
  * @author yuhao.wang
  */
-@Component
-@ConditionalOnProperty(prefix = "cache",name = "type",havingValue = "redisCaffeine")
+
 @Slf4j
 public class RedisMessageListener extends MessageListenerAdapter {
 

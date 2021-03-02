@@ -1,13 +1,9 @@
-cache:
-  type: redisCaffeine
-multi:
+wx:
   cache:
-    first:
-      conf: initialCapacity=10,maximumSize=500,expireAfterWrite=1800s
-redis:
-  cache:
-    enableTransaction: false
-    ttl: 1800
+    type: MULTI
+    caffeine-config: initialCapacity=10,maximumSize=500,expireAfterWrite=1800s
+    redis-enable-transaction: false
+    redisTtl: 1800
 spring:
   redis:
     database: 10

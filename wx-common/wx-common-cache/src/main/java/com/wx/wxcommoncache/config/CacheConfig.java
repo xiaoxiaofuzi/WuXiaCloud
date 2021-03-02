@@ -4,9 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.wx.wxcommoncache.multilevelcache.MultiLevelCacheConfiguration;
 import com.wx.wxcommoncache.multilevelcache.MultiLevelCacheManager;
 import com.wx.wxcommoncache.multilevelcache.enums.ChannelTopicEnum;
-import com.wx.wxcommoncore.utils.EnvironmentUtils;
+import com.wx.wxcommoncache.multilevelcache.listener.RedisMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,6 +38,20 @@ import java.util.Map;
 public class CacheConfig extends CachingConfigurerSupport {
 
     private static final String PREFIX = "WX:CACHE:";
+
+
+    @Bean
+    public WxCacheProperties wxCacheProperties(){
+        return new WxCacheProperties();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "wx.cache",name = "type",havingValue = "multi")
+    public MessageListenerAdapter redisMessageListener(){
+        return new RedisMessageListener();
+    }
+    @Autowired
+    private WxCacheProperties wxCacheProperties;
 
     /**
      * 添加自定义缓存异常处理
@@ -118,12 +133,12 @@ public class CacheConfig extends CachingConfigurerSupport {
 
     @Bean
     @ConditionalOnMissingBean(CacheManager.class)
-    @ConditionalOnProperty(prefix = "cache",name = "type",havingValue = "redis")
+    @ConditionalOnProperty(prefix = "wx.cache",name = "type",havingValue = "single")
     public CacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
 
         log.info("使用redis缓存");
         //默认半个小时
-        RedisCacheConfiguration configuration = getRedisCacheConfiguration(EnvironmentUtils.getLong("redis.cache.ttl", 1800));
+        RedisCacheConfiguration configuration = getRedisCacheConfiguration(wxCacheProperties.getRedisTtl());
 
         //对特定缓存名称，创建特定的缓存有效期
         Map<String, RedisCacheConfiguration> cacheConfigurations = new HashMap<>(4);
@@ -135,7 +150,7 @@ public class CacheConfig extends CachingConfigurerSupport {
                 .withInitialCacheConfigurations(cacheConfigurations);
 
         //是否开启事务
-        if (Boolean.valueOf(EnvironmentUtils.getString("redis.cache.enableTransaction"))) {
+        if (wxCacheProperties.isRedisEnableTransaction()) {
             builder.transactionAware();
         }
 
@@ -145,11 +160,11 @@ public class CacheConfig extends CachingConfigurerSupport {
 
     @Bean
     @ConditionalOnMissingBean(CacheManager.class)
-    @ConditionalOnProperty(prefix = "cache",name = "type",havingValue = "redisCaffeine")
+    @ConditionalOnProperty(prefix = "wx.cache",name = "type",havingValue = "multi")
     public CacheManager multiLevelCache(RedisTemplate<Serializable, Serializable> redisTemplate) {
         log.info("使用二级缓存（caffeine + redis）");
-        String firstConf = EnvironmentUtils.getString("multi.cache.first.conf", "");
-        long ttl = EnvironmentUtils.getLong("redis.cache.ttl", 1800);
+        String firstConf = wxCacheProperties.getCaffeineConfig();
+        int ttl = wxCacheProperties.getRedisTtl();
         MultiLevelCacheConfiguration multiLevelCacheConfiguration = getMultiLevelCacheConfiguration(firstConf,ttl);
 
         //对特定缓存名称，创建特定的缓存有效期
@@ -162,7 +177,7 @@ public class CacheConfig extends CachingConfigurerSupport {
                 .withInitialCacheConfigurations(multiLevelCacheConfigurationHashMap);
 
         //是否开启事务
-        if (Boolean.valueOf(EnvironmentUtils.getString("redis.cache.enableTransaction"))) {
+        if (wxCacheProperties.isRedisEnableTransaction()) {
             builder.transactionAware();
         }
 
@@ -177,7 +192,7 @@ public class CacheConfig extends CachingConfigurerSupport {
      * @return
      */
     @Bean
-    @ConditionalOnProperty(prefix = "cache",name = "type",havingValue = "redisCaffeine")
+    @ConditionalOnProperty(prefix = "wx.cache",name = "type",havingValue = "multi")
     public RedisMessageListenerContainer redisContainer(RedisConnectionFactory redisConnectionFactory, MessageListenerAdapter redisMessageListener) {
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 
@@ -193,7 +208,7 @@ public class CacheConfig extends CachingConfigurerSupport {
      * @param seconds  缓存存活时间
      * @return
      */
-    private MultiLevelCacheConfiguration getMultiLevelCacheConfiguration(String firstConf,long seconds) {
+    private MultiLevelCacheConfiguration getMultiLevelCacheConfiguration(String firstConf,int seconds) {
         return MultiLevelCacheConfiguration.defaultCacheConfig(firstConf, getRedisCacheConfiguration(seconds));
     }
 
@@ -202,7 +217,7 @@ public class CacheConfig extends CachingConfigurerSupport {
      * @param seconds  缓存存活时间
      * @return
      */
-    private RedisCacheConfiguration getRedisCacheConfiguration(long seconds) {
+    private RedisCacheConfiguration getRedisCacheConfiguration(int seconds) {
         return RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofSeconds(seconds));
     }

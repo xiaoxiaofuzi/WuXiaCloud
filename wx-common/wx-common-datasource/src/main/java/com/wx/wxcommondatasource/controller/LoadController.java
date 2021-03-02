@@ -32,20 +32,12 @@ public class LoadController {
 
     @PostMapping("/add") //recommond use this method
     public Set<String> add(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        DataSource dataSource = dataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPollName(), dataSource);
-        return ds.getCurrentDataSources().keySet();
+        return getKeys(dto, dataSourceCreator);
     }
 
     @PostMapping("/addBasic")
     public Set<String> addBasic(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        DataSource dataSource = basicDataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPollName(), dataSource);
-        return ds.getCurrentDataSources().keySet();
+        return getKeys(dto, basicDataSourceCreator);
     }
 
     @PostMapping("/addJndi")
@@ -57,18 +49,19 @@ public class LoadController {
 
     @PostMapping("/addDruid")
     public Set<String> addDruid(@Validated @RequestBody DataSourceDTO dto) {
-        DataSourceProperty dataSourceProperty = new DataSourceProperty();
-        BeanUtils.copyProperties(dto, dataSourceProperty);
-        DataSource dataSource = druidDataSourceCreator.createDataSource(dataSourceProperty);
-        ds.addDataSource(dto.getPollName(), dataSource);
-        return ds.getCurrentDataSources().keySet();
+        return getKeys(dto, druidDataSourceCreator);
     }
 
     @PostMapping("/addHikariCP")
     public Set<String> addHikariCP(@Validated @RequestBody DataSourceDTO dto) {
+        return getKeys(dto, hikariDataSourceCreator);
+    }
+
+
+    private Set<String> getKeys(@Validated @RequestBody DataSourceDTO dto, DataSourceCreator dataSourceCreator) {
         DataSourceProperty dataSourceProperty = new DataSourceProperty();
         BeanUtils.copyProperties(dto, dataSourceProperty);
-        DataSource dataSource = hikariDataSourceCreator.createDataSource(dataSourceProperty);
+        DataSource dataSource = dataSourceCreator.createDataSource(dataSourceProperty);
         ds.addDataSource(dto.getPollName(), dataSource);
         return ds.getCurrentDataSources().keySet();
     }

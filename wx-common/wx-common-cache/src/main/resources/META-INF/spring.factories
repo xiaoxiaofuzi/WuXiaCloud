@@ -2,5 +2,3 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.wx.wxcommoncache.config.RedisConfig,\
   com.wx.wxcommoncache.config.RedissonConfig,\
   com.wx.wxcommoncache.config.CacheConfig
-
-  

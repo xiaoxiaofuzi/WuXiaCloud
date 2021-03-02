@@ -1,0 +1,36 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.wx.wxcommoncache.config.WxCacheProperties",
+      "name": "wx.cache",
+      "type": "com.wx.wxcommoncache.config.WxCacheProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.wx.wxcommoncache.config.WxCacheProperties",
+      "name": "wx.cache.type",
+      "description": "缓存类型：CacheTypeEnum",
+      "type": "com.wx.wxcommoncache.cacheenum.CacheTypeEnum"
+    },
+    {
+      "sourceType": "com.wx.wxcommoncache.config.WxCacheProperties",
+      "name": "wx.cache.caffeineConfig",
+      "description": "一级缓存配置",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.wx.wxcommoncache.config.WxCacheProperties",
+      "name": "wx.cache.redisEnableTransaction",
+      "description": "二级缓存是否开启事务",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.wx.wxcommoncache.config.WxCacheProperties",
+      "name": "wx.cache.redisTtl",
+      "description": "二级缓存配置--存活时间",
+      "type": "java.lang.Integer"
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+wx:
+  datasource:
+    masterSlave: true
 spring:
 #排除原生Druid的快速配置类
   autoconfigure:
@@ -56,3 +59,14 @@ spring:
           password: ENC(VZamSTMi224AH6RUtJGXNldiDp/XEL2ozRhBUu/o9ChodT4JEb9kE/j0EFhXKbjsfvLVacUW0AUzetA6OrNJug==)
           driver-class-name: com.mysql.cj.jdbc.Driver
       strategy: com.baomidou.dynamic.datasource.strategy.RandomDynamicDataSourceStrategy
+pagehelper:
+  #指定数据库，不指定的话会默认自动检测数据库类型
+  helperDialect: mysql
+  # 是否启用分页合理化。
+  # 如果启用，当pagenum<1时，会自动查询第一页的数据，当pagenum>pages时，自动查询最后一页数据；
+  # 不启用的，以上两种情况都会返回空数据
+  reasonable: true
+mybatis-plus:
+  configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml

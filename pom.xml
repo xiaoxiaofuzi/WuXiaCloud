@@ -53,7 +53,13 @@
         <mysql.version>8.0.11</mysql.version>
         <!--多数据源-->
         <dynamic.boot.version>3.3.1</dynamic.boot.version>
+        <!--mybatis-plus-->
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <pagehelper.boot.version>1.3.0</pagehelper.boot.version>
+        <!-- 代码生成器 依赖 -->
+        <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
+        <!--模板引擎 依赖-->
+        <velocity.version>2.2</velocity.version>
         <!--druid 版本-->
         <druid.boot.vserion>1.2.3</druid.boot.vserion>
         <!-- 环境配置 -->
@@ -111,6 +117,7 @@
 
     <!--公共依赖-->
     <dependencies>
+
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -187,6 +194,21 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
         </dependencies>
 

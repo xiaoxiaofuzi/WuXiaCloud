@@ -167,6 +167,7 @@
     <springProfile name="dev">
         <logger name="com.wx.wxceshi" level="info"/>
         <logger name="com.wx.wxcommoncache" level="debug"/>
+        <logger name="com.wx.wxcommondatasource" level="debug"/>
     </springProfile>
 
     <root level="info">

@@ -21,6 +21,10 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.wx</groupId>
+            <artifactId>wx-common-locale</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.wx</groupId>

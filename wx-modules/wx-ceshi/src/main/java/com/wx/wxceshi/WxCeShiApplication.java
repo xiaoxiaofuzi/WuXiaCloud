@@ -11,7 +11,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import javax.net.ssl.HttpsURLConnection;
 
 @WxCloudApplication
-@MapperScan("com.wx.wxceshi.mapper")
+@MapperScan("com.wx.**.mapper")
 @Slf4j
 public class WxCeShiApplication extends SpringBootServletInitializer {
 

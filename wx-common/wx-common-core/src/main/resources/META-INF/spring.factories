@@ -1,3 +1,13 @@
 # Environment Post Processors
 org.springframework.boot.env.EnvironmentPostProcessor=\
 com.wx.wxcommoncore.configs.WxEnvironmentPostProcessor
+
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wx.wxcommoncore.exception.WxGlobalExceptionAdvice,\
+com.wx.wxcommoncore.configs.FeignAutoConfiguration
+
+
+
+org.springframework.context.ApplicationListener =\
+com.wx.wxcommoncore.listener.WxApplicationListener

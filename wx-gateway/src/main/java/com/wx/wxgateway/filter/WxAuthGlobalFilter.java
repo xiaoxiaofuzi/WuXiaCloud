@@ -26,13 +26,12 @@ public class WxAuthGlobalFilter implements GlobalFilter,Ordered {
         ServerHttpRequest request = exchange.getRequest();
         // 获取当前网关访问的URI
         String requestUri = request.getPath().pathWithinApplication().value();
-
         String path = exchange.getRequest().getURI().getPath();
-
         log.info("path:"+path);
         log.info("uri:"+requestUri);
+        Mono<Void> filter = chain.filter(exchange);
 
-        return chain.filter(exchange);
+        return filter;
     }
 
     @Override

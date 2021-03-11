@@ -398,3 +398,35 @@ management:
 </dependency>
 ```
 
+### 多数据源源码分析
+
+```java
+//DynamicDataSourceAutoConfiguration
+
+@Role(value = BeanDefinition.ROLE_INFRASTRUCTURE)
+@Bean
+@ConditionalOnMissingBean
+public DynamicDataSourceAnnotationAdvisor dynamicDatasourceAnnotationAdvisor(DsProcessor dsProcessor) {
+                    DynamicDataSourceAnnotationInterceptor interceptor = new DynamicDataSourceAnnotationInterceptor(properties.isAllowedPublicOnly(), dsProcessor);
+                    DynamicDataSourceAnnotationAdvisor advisor = new DynamicDataSourceAnnotationAdvisor(interceptor);
+                    advisor.setOrder(properties.getOrder());
+                    return advisor;
+}
+
+/**
+* 这个为
+*/
+@Bean
+@ConditionalOnMissingBean
+public DsProcessor dsProcessor() {
+          DsHeaderProcessor headerProcessor = new DsHeaderProcessor();
+          DsSessionProcessor sessionProcessor = new DsSessionProcessor();
+          DsSpelExpressionProcessor spelExpressionProcessor = new DsSpelExpressionProcessor();
+          headerProcessor.setNextProcessor(sessionProcessor);
+          sessionProcessor.setNextProcessor(spelExpressionProcessor);
+          return headerProcessor;
+}
+
+
+```
+

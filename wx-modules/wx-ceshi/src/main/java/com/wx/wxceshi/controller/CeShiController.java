@@ -5,12 +5,16 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.wx.wxceshi.entity.User;
 import com.wx.wxceshi.service.UserService;
+import com.wx.wxcommoncore.support.http.HttpCode;
+import com.wx.wxcommondatasource.base.BaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +24,10 @@ import java.util.Random;
 @RestController
 @RequestMapping("/ceshi")
 @Slf4j
-public class CeShiController {
+public class CeShiController extends BaseController<UserService,User> {
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
-
-    @Autowired
-    private UserService userService;
 
 
     @Value("${server.port}")
@@ -54,13 +55,13 @@ public class CeShiController {
 
     @GetMapping("/getUserM")
     public String getUserM(){
-        return JSON.toJSONString(userService.selectLambdaMasterUsers());
+        return JSON.toJSONString(baseService.selectLambdaMasterUsers());
     }
 
     @GetMapping("/getUserS")
     public String getUserS(){
         PageHelper.startPage(1,1);
-        Page<User> users = (Page<User>)userService.selectLambdaSlaveUsers();
+        Page<User> users = (Page<User>)baseService.selectLambdaSlaveUsers();
         log.info(JSON.toJSONString(users));
         return JSON.toJSONString(users.getResult());
     }
@@ -71,8 +72,20 @@ public class CeShiController {
         User user = new User();
         user.setName("郭浩"+System.currentTimeMillis());
         user.setAge(new Random().nextInt(30));
-        userService.addUser(user);
+        baseService.addUser(user);
         return JSON.toJSONString(user);
+    }
+
+    @GetMapping("/sel")
+    public ResponseEntity<ModelMap> sel(){
+        baseService.selectCeShi();
+        return setModelMap(HttpCode.OK);
+    }
+
+    @GetMapping("/selE")
+    public ResponseEntity<ModelMap> selE(){
+        int i = 1/0;
+        return setModelMap(HttpCode.OK);
     }
 
 

@@ -4,10 +4,11 @@ package com.wx.wxceshi.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wx.wxceshi.entity.User;
+import com.wx.wxcommondatasource.base.BaseService;
 
 import java.util.List;
 
-public interface UserService extends IService<User> {
+public interface UserService extends BaseService<User> {
 
     List<User> selectMasterUsers();
 
@@ -22,4 +23,6 @@ public interface UserService extends IService<User> {
     void addUser(User user);
 
     void deleteUserById(Long id);
+
+    void selectCeShi();
 }

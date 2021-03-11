@@ -1,6 +1,7 @@
 package com.wx.wxcommoncore.annotation;
 
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.lang.annotation.*;
@@ -15,5 +16,6 @@ import java.lang.annotation.*;
 @Inherited
 @SpringCloudApplication
 @ComponentScan(basePackages = { "com.wx"})
+@EnableFeignClients
 public @interface WxCloudApplication {
 }

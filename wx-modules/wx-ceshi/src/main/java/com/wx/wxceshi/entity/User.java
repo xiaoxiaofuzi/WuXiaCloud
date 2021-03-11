@@ -1,14 +1,10 @@
 package com.wx.wxceshi.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.wx.wxcommondatasource.base.BaseModel;
 import lombok.Data;
 
 @Data
-public class User {
-
-    @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+public class User extends BaseModel {
 
     private String name;
 

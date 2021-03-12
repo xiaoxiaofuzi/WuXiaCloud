@@ -12,6 +12,7 @@
 
     <modules>
         <module>wx-ceshi</module>
+        <module>wx-system</module>
     </modules>
 
     <artifactId>wx-modules</artifactId>

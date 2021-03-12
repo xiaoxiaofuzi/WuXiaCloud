@@ -16,6 +16,6 @@ import java.lang.annotation.*;
 @Inherited
 @SpringCloudApplication
 @ComponentScan(basePackages = { "com.wx"})
-@EnableFeignClients
+@EnableFeignClients(basePackages = { "com.wx"})
 public @interface WxCloudApplication {
 }

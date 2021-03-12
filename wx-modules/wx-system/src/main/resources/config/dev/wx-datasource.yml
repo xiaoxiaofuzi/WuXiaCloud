@@ -1,0 +1,59 @@
+wx:
+  datasource:
+    masterSlave: false
+spring:
+#排除原生Druid的快速配置类
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: koala
+    dynamic:
+      druid: #以下是支持的全局默认值
+        #连接池配置
+        initial-size: 10
+        max-active: 100
+        max-evictable-idle-time-millis: 60000
+        max-pool-prepared-statement-per-connection-size: 20
+        max-wait: 10000
+        min-evictable-idle-time-millis: 30000
+        min-idle: 5
+        pool-prepared-statements: true
+        test-on-borrow: false
+        test-on-return: false
+        test-while-idle: true
+        time-between-eviction-runs-millis: 60000
+        validation-query: SELECT 1 FROM DUAL
+        validation-query-timeout: 5000
+#        connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+        #配置多个英文逗号分隔
+        filters: stat,wall,slf4j
+        stat:
+          merge-sql: true
+          log-slow-sql: true
+          slow-sql-millis: 5000
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        master:
+          #JDBC 配置
+          url: jdbc:mysql://localhost:3306/vaccine?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
+          username: root
+          password: ENC(hucVa+HZKkEVJUd8pQ63XBpbFG3sMLN67EKi3gypUf87MiCDW4jV4txt+jMzQtsf3+BLn75yOAoAutqvpA+sMg==)
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAI9gPmj8aR6VhewVAbAEAv4mmTzDA6iUbWbWeH1LBV+PM++uCjF2BNM+GO4tWTmkakoBtlxTiafGZmoI3t5uFhMCAwEAAQ==
+pagehelper:
+  #指定数据库，不指定的话会默认自动检测数据库类型
+  helperDialect: mysql
+  # 是否启用分页合理化。
+  # 如果启用，当pagenum<1时，会自动查询第一页的数据，当pagenum>pages时，自动查询最后一页数据；
+  # 不启用的，以上两种情况都会返回空数据
+  reasonable: true
+mybatis-plus:
+  configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml

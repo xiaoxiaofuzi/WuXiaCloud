@@ -17,7 +17,7 @@ import java.util.Locale;
 @Slf4j
 public class WxLocaleConfigs {
 
-    private final String LOCAL_HEAD_NAME = "Locale";
+    private final String LOCAL_HEAD_NAME = "locale";
 
     @Bean
     public LocaleResolver localeResolver(final MessageSource messageSource) {

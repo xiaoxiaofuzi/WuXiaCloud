@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.wx.wxceshi.entity.User;
 import com.wx.wxceshi.service.UserService;
+import com.wx.wxcommoncore.api.system.RemoteSysUserService;
 import com.wx.wxcommoncore.support.http.HttpCode;
 import com.wx.wxcommondatasource.base.BaseController;
 import lombok.extern.slf4j.Slf4j;
@@ -86,6 +87,15 @@ public class CeShiController extends BaseController<UserService,User> {
     public ResponseEntity<ModelMap> selE(){
         int i = 1/0;
         return setModelMap(HttpCode.OK);
+    }
+
+
+    @Autowired
+    private RemoteSysUserService remoteSysUserService;
+
+    @GetMapping("/getSysUser")
+    public ResponseEntity<ModelMap> getSysUser(){
+        return remoteSysUserService.getSysUser();
     }
 
 

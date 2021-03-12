@@ -1,35 +1,43 @@
 package com.wx.wxcommonlocale.config;
 
 import com.wx.wxcommoncore.utils.I18nUtils;
-import com.wx.wxcommonlocale.support.aspect.LocaleInterceptor;
+import com.wx.wxcommonlocale.support.i18n.HeaderLocaleChangeInterceptor;
+import com.wx.wxcommonlocale.support.i18n.HeaderLocaleContextResolver;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.Advisor;
-import org.springframework.aop.aspectj.AspectJExpressionPointcut;
-import org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Locale;
 
 @Configuration
 @Slf4j
 public class WxLocaleConfigs {
 
+    private final String LOCAL_HEAD_NAME = "Locale";
+
     @Bean
-    public LocaleInterceptor localeInterceptor(final MessageSource messageSource) {
+    public LocaleResolver localeResolver(final MessageSource messageSource) {
         I18nUtils.setMessageSource(messageSource);
-        return new LocaleInterceptor();
+        HeaderLocaleContextResolver localeResolver = new HeaderLocaleContextResolver();
+        localeResolver.setLocaleHeadName(LOCAL_HEAD_NAME);
+        localeResolver.setDefaultLocale(Locale.SIMPLIFIED_CHINESE);
+        return localeResolver;
     }
 
     @Bean
-    public Advisor localeAdvisor(final LocaleInterceptor localeInterceptor) {
-        AspectJExpressionPointcut localePointcut = new AspectJExpressionPointcut();
-        localePointcut.setExpression(
-                "@within(org.springframework.stereotype.Controller) || @within(org.springframework.web.bind.annotation.RestController)");
-        DefaultBeanFactoryPointcutAdvisor apiLogAdvisor = new DefaultBeanFactoryPointcutAdvisor();
-        apiLogAdvisor.setAdvice(localeInterceptor);
-        apiLogAdvisor.setPointcut(localePointcut);
-        return apiLogAdvisor;
+    public WebMvcConfigurer localeInterceptor() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                HeaderLocaleChangeInterceptor localeInterceptor = new HeaderLocaleChangeInterceptor();
+                localeInterceptor.setParamName(LOCAL_HEAD_NAME);
+                registry.addInterceptor(localeInterceptor);
+            }
+        };
     }
-
 
 }

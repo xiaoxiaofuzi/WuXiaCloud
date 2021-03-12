@@ -1,5 +1,7 @@
 package com.wx.wxcommoncore.support.http;
 
+import com.wx.wxcommoncore.utils.I18nUtils;
+
 public enum HttpCode {
 
     /** 200请求成功 */
@@ -65,5 +67,9 @@ public enum HttpCode {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    public String msg() {
+        return I18nUtils.getMessage("HTTPCODE_"+toString());
     }
 }

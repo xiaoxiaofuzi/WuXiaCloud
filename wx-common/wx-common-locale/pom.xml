@@ -15,14 +15,16 @@
     </description>
 
     <dependencies>
+
         <dependency>
             <groupId>com.wx</groupId>
             <artifactId>wx-common-core</artifactId>
         </dependency>
 
-
-
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
     </dependencies>
 
 

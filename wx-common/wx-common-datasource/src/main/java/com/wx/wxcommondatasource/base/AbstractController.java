@@ -71,8 +71,7 @@ public abstract class AbstractController {
 
     /** 设置响应代码 */
     protected ResponseEntity<ModelMap> setModelMap(ModelMap modelMap, HttpCode code, Object data) {
-        String codeValue = code.value().toString();
-        return setModelMap(modelMap, codeValue, "HTTPCODE_"+codeValue, data);
+        return setModelMap(modelMap, code.value().toString(), code.msg(), data);
     }
 
     /** 设置响应代码 */

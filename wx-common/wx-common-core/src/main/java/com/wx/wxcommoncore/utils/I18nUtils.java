@@ -1,12 +1,7 @@
 package com.wx.wxcommoncore.utils;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Component;
 
 /**
   *
@@ -37,10 +32,7 @@ public class I18nUtils{
 
 
     public static String getMessage(String key) {
-        if(messageSource == null){
-            return null;
-        }
-        return messageSource.getMessage(key,null,LocaleContextHolder.getLocale());
+        return getMessage(key,new Object(){});
     }
 
 }

@@ -1,3 +1,6 @@
 spring:
     messages:
       basename: i18n/messages
+      #如果默认false,则会出现匹配不到就会跑异常（NoSuchMessageException）的情况
+      use-code-as-default-message: true
+      always-use-message-format: true

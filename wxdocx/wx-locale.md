@@ -4,17 +4,17 @@
 
 ​		创建 bundle,这里实在 resources目录下新建的i18n目录中创建
 
-![1615693477274](E:\WuXiaCloud\wxdocx\locale-images\创建bundle.png)
+![1615693477274](.\locale-images\创建bundle.png)
 
 ​        添加文件名：**messages(建议，也可以任意)**，并添加中文（zh_CN）,英文（en_US）两种语言。
 
-![1615693857281](E:\WuXiaCloud\wxdocx\locale-images\名称.png)
+![1615693857281](.\locale-images\名称.png)
 
-​                         ![1615693898713](E:\WuXiaCloud\wxdocx\locale-images\语言.png)
+​                         ![1615693898713](.\locale-images\语言.png)
 
  		添加完成，打开任意一个文件，切换编写模式，进行对应的文本编写。这里我们需要的文件已经创建完毕。
 
-![1615694092529](E:\WuXiaCloud\wxdocx\locale-images\文本编写.png)
+![1615694092529](.\locale-images\文本编写.png)
 
 ## 2. springboot自带配置类解析
 
@@ -195,17 +195,17 @@ public static void setLocaleContext(@Nullable LocaleContext localeContext, boole
 
 1. 进入过滤器RequestContextFilter.initContextHolders()方法，获取request头中的accept-language来初始化 locale(默认是zh_CN),此时为SimpleLocaleContext
 
-![1615726676338](E:\WuXiaCloud\wxdocx\locale-images\debug1.png)
+![1615726676338](.\locale-images\debug1.png)
 
-![1615726722768](E:\WuXiaCloud\wxdocx\locale-images\debug2.png)
+![1615726722768](.\locale-images\debug2.png)
 
-![1615726794705](E:\WuXiaCloud\wxdocx\locale-images\debug3.png)
+![1615726794705](.\locale-images\debug3.png)
 
 实际就是将**国际化上下文（localeContext）**放入 ThreadLocal,再使用的时候取出来。
 
 2. 进入DispatcherServlet.buildLocaleContext()方法，此时注意到LocaleContextResolver 进入我们的视野
 
-![1615726876383](E:\WuXiaCloud\wxdocx\locale-images\debug4.png)
+![1615726876383](.\locale-images\debug4.png)
 
 ##### **解析器（LocaleResolver）的配置**
 
@@ -273,7 +273,7 @@ public LocaleContext resolveLocaleContext(final HttpServletRequest request) {
 
 接下来继续追踪，进入FrameworkServlet.processRequest()方法的initContextHolders()将上一步自定义的国际化上下文放入ThreadLocal中。【DispatcherServlet 继承了 FrameworkServlet，在processRequest方法中，调用上一步buildLocaleContext()方法】
 
-![1615727783676](E:\WuXiaCloud\wxdocx\locale-images\debug5.png)
+![1615727783676](.\locale-images\debug5.png)
 
 ```java
 /**
@@ -370,7 +370,7 @@ public static LocaleResolver getLocaleResolver(HttpServletRequest request) {
 }
 ```
 
-![1615728700118](E:\WuXiaCloud\wxdocx\locale-images\debug6.png)
+![1615728700118](.\locale-images\debug6.png)
 
 **localeResolver.setLocale(request, response, locale);** 具体查看自定义上下文（**HeaderLocaleContextResolver**）的实现。
 
@@ -417,7 +417,7 @@ public static LocaleResolver getLocaleResolver(HttpServletRequest request) {
 
 其中**request.setAttribute(localeAttributeName,(locale != null ? locale : getDefaultLocale()));**正好解释了这里的问题。
 
-![1615728924295](E:\WuXiaCloud\wxdocx\locale-images\wen1.png)
+![1615728924295](.\locale-images\wen1.png)
 
 ==这个介绍完了==
 
@@ -429,13 +429,13 @@ public static LocaleResolver getLocaleResolver(HttpServletRequest request) {
 
 还是获取自定以的 国际化上下文，调用resolveLocale()方法获取Locale。
 
-![1615729093050](E:\WuXiaCloud\wxdocx\locale-images\debug7.png)
+![1615729093050](.\locale-images\debug7.png)
 
 继承关系【**HeaderLocaleContextResolver extends AbstractLocaleContextResolver**】
 
 具体查看HeaderLocaleContextResolver .resolveLocaleContext()方法，上面有介绍
 
-![1615729166434](E:\WuXiaCloud\wxdocx\locale-images\debug8.png)
+![1615729166434](.\locale-images\debug8.png)
 
 实则还是从 request 域中获取值。
 
@@ -455,7 +455,7 @@ public static LocaleResolver getLocaleResolver(HttpServletRequest request) {
 
 ### 4.1 配置文件
 
-![1615694233065](E:\WuXiaCloud\wxdocx\locale-images\配置文件.png)
+![1615694233065](.\locale-images\配置文件.png)
 
 ```yaml
 spring:

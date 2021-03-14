@@ -8,7 +8,7 @@ https://www.cnblogs.com/crazymakercircle/p/11704077.html
 
 ### 工作原理
 
-![1612257597602](E:\wuxia\WuXiaCloud\img\gateway原理.png)
+![1612257597602](.\img\gateway原理.png)
 
 
 

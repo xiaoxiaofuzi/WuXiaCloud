@@ -35,7 +35,7 @@ public class WxLocaleConfigs {
             public void addInterceptors(InterceptorRegistry registry) {
                 HeaderLocaleChangeInterceptor localeInterceptor = new HeaderLocaleChangeInterceptor();
                 localeInterceptor.setParamName(LOCAL_HEAD_NAME);
-                registry.addInterceptor(localeInterceptor);
+                registry.addInterceptor(localeInterceptor).order(-1);
             }
         };
     }

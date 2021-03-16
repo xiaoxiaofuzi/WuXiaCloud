@@ -31,6 +31,10 @@ spring:
            min-idle: -1
 
     cloud:
+      loadbalancer:
+        ribbon:
+          #替换成 Reactive 模式的负载均衡
+          enabled: false
       nacos:
         config:
 #          server-addr: 127.0.0.1:8848

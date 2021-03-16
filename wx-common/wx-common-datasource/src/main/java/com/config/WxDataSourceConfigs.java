@@ -1,28 +1,31 @@
-package com.wx.wxcommondatasource.config;
+package com.config;
 
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties;
+import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import com.wx.wxcommondatasource.interceptor.WxMasterSlaveAutoRoutingPlugin;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
  * @author gh
- *
+ * AutoConfigureAfter 注解必须在 扫描包之外才能生效
  *
  *
  */
 @Configuration
 @EnableConfigurationProperties(DynamicDataSourceProperties.class)
-@DependsOn("pageHelperProperties")
+//@DependsOn("pageHelperProperties")
+@AutoConfigureAfter({PageHelperAutoConfiguration.class})
 public class WxDataSourceConfigs {
+
 
 
     @Bean
@@ -43,7 +46,7 @@ public class WxDataSourceConfigs {
      * 功能描述: 如果设置数据库为主从，则添加 WxMasterSlaveAutoRoutingPlugin 拦截器
      *
      * 由于添加了 PageInterceptor（可以查看 PageHelperAutoConfiguration ），要想当前拦截器先执行，
-     * 必须 引用 @DependsOn("pageHelperProperties") 让PageHelperAutoConfiguration先初始化，之后再执行 当前的拦截器
+     * 必须  让PageHelperAutoConfiguration先初始化，之后再执行 当前的拦截器
      *
      * @author gh
      * @Date 2021/3/2 0002 

@@ -1,4 +1,4 @@
-package com.wx.wxcommondatasource.config;
+package com.config;
 
 
 import lombok.Data;

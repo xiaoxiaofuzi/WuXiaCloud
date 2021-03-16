@@ -2,14 +2,14 @@
   "hints": [],
   "groups": [
     {
-      "sourceType": "com.wx.wxcommondatasource.config.WxDatasourceProperties",
+      "sourceType": "com.config.WxDatasourceProperties",
       "name": "wx.datasource",
-      "type": "com.wx.wxcommondatasource.config.WxDatasourceProperties"
+      "type": "com.config.WxDatasourceProperties"
     }
   ],
   "properties": [
     {
-      "sourceType": "com.wx.wxcommondatasource.config.WxDatasourceProperties",
+      "sourceType": "com.config.WxDatasourceProperties",
       "default": false,
       "name": "wx.datasource.masterSlave",
       "description": "是否是主从结构",

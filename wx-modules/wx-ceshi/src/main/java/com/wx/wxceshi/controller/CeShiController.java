@@ -99,5 +99,13 @@ public class CeShiController extends BaseController<UserService,User> {
     }
 
 
+    @GetMapping("/addSysUser")
+    public ResponseEntity<ModelMap> addSysUser(){
+        User user = new User();
+        user.setName("分布式"+System.currentTimeMillis());
+        user.setAge(new Random().nextInt(30));
+        return setSuccessModelMap(baseService.addSysUser(user));
+    }
+
 
 }

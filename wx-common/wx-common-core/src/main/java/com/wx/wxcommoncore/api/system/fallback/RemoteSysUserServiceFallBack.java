@@ -12,6 +12,15 @@ import org.springframework.ui.ModelMap;
 public class RemoteSysUserServiceFallBack implements RemoteSysUserService {
     @Override
     public ResponseEntity<ModelMap> getSysUser() {
+        return getModelMapResponseEntity();
+    }
+
+    @Override
+    public ResponseEntity<ModelMap> addSysUser() {
+        return getModelMapResponseEntity();
+    }
+
+    private ResponseEntity<ModelMap> getModelMapResponseEntity() {
         ModelMap modelMap = new ModelMap();
         modelMap.put(WxConstant.ModeMap.CODE, HttpCode.SERVICE_UNAVAILABLE.value().toString());
         String system = I18nUtils.getMessage("HTTPCODE_"+HttpCode.SERVICE_UNAVAILABLE.value().toString(), "system");

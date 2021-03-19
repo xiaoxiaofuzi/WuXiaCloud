@@ -26,8 +26,6 @@ import java.util.List;
 @AutoConfigureAfter({PageHelperAutoConfiguration.class})
 public class WxDataSourceConfigs {
 
-
-
     @Bean
     public WxDatasourceProperties wxDatasourceProperties(){
         return new WxDatasourceProperties();
@@ -81,8 +79,6 @@ public class WxDataSourceConfigs {
             return false;
         }
     }
-
-
 
 
 }

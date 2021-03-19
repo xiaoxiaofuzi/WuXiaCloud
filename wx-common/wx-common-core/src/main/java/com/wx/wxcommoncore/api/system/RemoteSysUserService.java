@@ -7,11 +7,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Component
 @FeignClient(contextId = "remoteSysUserService", value = "wx-system",fallback = RemoteSysUserServiceFallBack.class)
 public interface RemoteSysUserService {
 
-    @GetMapping("/sys")
+     @GetMapping("/sys")
      ResponseEntity<ModelMap> getSysUser();
+
+     @GetMapping("/sys/add")
+     ResponseEntity<ModelMap> addSysUser();
 
 }

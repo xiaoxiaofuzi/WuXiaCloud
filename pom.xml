@@ -62,6 +62,7 @@
         <velocity.version>2.2</velocity.version>
         <!--druid 版本-->
         <druid.boot.vserion>1.2.3</druid.boot.vserion>
+        <spring.boot.seata.version>1.4.0</spring.boot.seata.version>
         <!-- 环境配置 -->
         <spring.profiles.active>dev</spring.profiles.active>
     </properties>
@@ -214,6 +215,11 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${spring.boot.seata.version}</version>
             </dependency>
         </dependencies>
 

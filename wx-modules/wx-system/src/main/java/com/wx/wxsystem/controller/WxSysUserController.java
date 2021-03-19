@@ -37,7 +37,7 @@ public class WxSysUserController extends BaseController<WxSysUserService,WxSysUs
         user.setLogin("admin"+new Random().nextInt(10));
         user.setPassword("pw"+new Random().nextInt(10));
         user.setCreationTime(new Timestamp(System.currentTimeMillis()));
-        baseService.save(user);
+        baseService.saveOrUpdate(user);
         return setSuccessModelMap(JSON.toJSONString(user));
     }
 

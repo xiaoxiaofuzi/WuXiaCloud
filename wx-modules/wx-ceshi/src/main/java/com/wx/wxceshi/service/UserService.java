@@ -2,7 +2,6 @@ package com.wx.wxceshi.service;
 
 
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.wx.wxceshi.entity.User;
 import com.wx.wxcommondatasource.base.BaseService;
 
@@ -25,4 +24,6 @@ public interface UserService extends BaseService<User> {
     void deleteUserById(Long id);
 
     void selectCeShi();
+
+    User addSysUser(User user);
 }

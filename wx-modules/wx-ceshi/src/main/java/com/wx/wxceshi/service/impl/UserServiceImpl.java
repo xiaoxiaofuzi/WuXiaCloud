@@ -7,6 +7,7 @@ import com.wx.wxceshi.mapper.UserMapper;
 import com.wx.wxceshi.service.UserService;
 import com.wx.wxcommoncore.api.system.RemoteSysUserService;
 import com.wx.wxcommondatasource.base.BaseServiceImpl;
+import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
         _this.saveOrUpdate(user);
         ResponseEntity<ModelMap> responseEntity = remoteSysUserService.addSysUser();
         System.out.println("system系统返回:"+responseEntity);
-        int i = 1/0;
+        System.out.println("XID:"+ RootContext.getXID());
+        if(!"200".equals(responseEntity.getBody().get("code"))){
+            throw new RuntimeException("错误");
+        }
         return user;
     }
 

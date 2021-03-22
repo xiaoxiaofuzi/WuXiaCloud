@@ -3,7 +3,6 @@
  */
 package com.wx.wxcommondatasource.base;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.wx.wxcommoncore.support.WxConstant;
 import com.wx.wxcommoncore.support.http.HttpCode;

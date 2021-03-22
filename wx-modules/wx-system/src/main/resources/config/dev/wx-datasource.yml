@@ -46,7 +46,7 @@ spring:
           password: ENC(hucVa+HZKkEVJUd8pQ63XBpbFG3sMLN67EKi3gypUf87MiCDW4jV4txt+jMzQtsf3+BLn75yOAoAutqvpA+sMg==)
           driver-class-name: com.mysql.cj.jdbc.Driver
           public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAI9gPmj8aR6VhewVAbAEAv4mmTzDA6iUbWbWeH1LBV+PM++uCjF2BNM+GO4tWTmkakoBtlxTiafGZmoI3t5uFhMCAwEAAQ==
-      seata: true
+      seata: false
 pagehelper:
   #指定数据库，不指定的话会默认自动检测数据库类型
   helperDialect: mysql
@@ -60,7 +60,7 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
 #seata配置
 seata:
-  enabled: true
+  enabled: false
   config:
     type: nacos
     nacos:
@@ -70,3 +70,5 @@ seata:
       username: "nacos"
       password: "nacos"
   enable-auto-data-source-proxy: false
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-seata-service-group # 事务群  组（可以每个应用独立取名，也可以使用相同的名字）

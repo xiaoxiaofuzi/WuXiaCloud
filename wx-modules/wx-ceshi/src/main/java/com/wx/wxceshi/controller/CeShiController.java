@@ -1,6 +1,9 @@
 package com.wx.wxceshi.controller;
 
+import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.nacos.api.config.ConfigService;
+import com.alibaba.nacos.api.exception.NacosException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.wx.wxceshi.entity.User;
@@ -17,6 +20,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +33,7 @@ public class CeShiController extends BaseController<UserService,User> {
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
 
 
     @Value("${server.port}")
@@ -101,11 +106,22 @@ public class CeShiController extends BaseController<UserService,User> {
 
     @GetMapping("/addSysUser")
     public ResponseEntity<ModelMap> addSysUser(){
+
         User user = new User();
         user.setName("分布式"+System.currentTimeMillis());
         user.setAge(new Random().nextInt(30));
         return setSuccessModelMap(baseService.addSysUser(user));
     }
 
+    @Autowired
+    private NacosConfigManager nacosConfigManager;
 
+
+    @GetMapping("/seataG/{num}")
+    public ResponseEntity<ModelMap> seataG(@PathVariable("num") String num) throws NacosException {
+        ConfigService configService = nacosConfigManager.getConfigService();
+        configService.publishConfig("service.vgroupMapping.wx-ceshi-seata-service-group","SEATA_GROUP","wx-seata-"+num);
+        boolean seata_group = configService.publishConfig("service.vgroupMapping.wx-system-seata-service-group", "SEATA_GROUP", "wx-seata-"+num);
+        return setSuccessModelMap(seata_group);
+    }
 }

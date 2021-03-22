@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.wx.wxcommondatasource.base.BaseController;
 import com.wx.wxsystem.entity.WxSysUser;
 import com.wx.wxsystem.service.WxSysUserService;
+import io.seata.core.context.RootContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
@@ -38,6 +39,8 @@ public class WxSysUserController extends BaseController<WxSysUserService,WxSysUs
         user.setPassword("pw"+new Random().nextInt(10));
         user.setCreationTime(new Timestamp(System.currentTimeMillis()));
         baseService.saveOrUpdate(user);
+        System.out.println("XID:"+ RootContext.getXID());
+        int i = 1/0;
         return setSuccessModelMap(JSON.toJSONString(user));
     }
 

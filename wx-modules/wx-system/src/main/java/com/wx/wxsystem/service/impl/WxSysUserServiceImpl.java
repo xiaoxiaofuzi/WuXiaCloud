@@ -9,4 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WxSysUserServiceImpl extends BaseServiceImpl<WxSysUserMapper,WxSysUser> implements WxSysUserService {
+
+
+    @Override
+    public boolean saveOrUpdate(WxSysUser entity) {
+        boolean b = super.saveOrUpdate(entity);
+        return b;
+    }
 }

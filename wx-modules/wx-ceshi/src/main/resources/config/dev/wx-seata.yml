@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    dynamic:
+      seata: ${seata.enabled}
+#seata配置
+seata:
+  enabled: false
+  config:
+    type: nacos
+    nacos:
+      server-addr: 10.200.1.27:8848
+      group: "SEATA_GROUP"
+      namespace: ""
+      username: "nacos"
+      password: "nacos"
+  enable-auto-data-source-proxy: false
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-seata-service-group # 事务群  组（可以每个应用独立取名，也可以使用相同的名字）

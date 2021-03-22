@@ -59,7 +59,6 @@ spring:
           password: ENC(VZamSTMi224AH6RUtJGXNldiDp/XEL2ozRhBUu/o9ChodT4JEb9kE/j0EFhXKbjsfvLVacUW0AUzetA6OrNJug==)
           driver-class-name: com.mysql.cj.jdbc.Driver
       strategy: com.baomidou.dynamic.datasource.strategy.RandomDynamicDataSourceStrategy
-      seata: false
 pagehelper:
   #指定数据库，不指定的话会默认自动检测数据库类型
   helperDialect: mysql
@@ -71,18 +70,4 @@ mybatis-plus:
   configuration:
         log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:/mapper/**/*.xml
-#seata配置
-seata:
-  enabled: false
-  config:
-    type: nacos
-    nacos:
-      server-addr: 10.200.1.27:8848
-      group: "SEATA_GROUP"
-      namespace: ""
-      username: "nacos"
-      password: "nacos"
-  enable-auto-data-source-proxy: false
-  application-id: ${spring.application.name}
-  tx-service-group: ${spring.application.name}-seata-service-group # 事务群  组（可以每个应用独立取名，也可以使用相同的名字）
 

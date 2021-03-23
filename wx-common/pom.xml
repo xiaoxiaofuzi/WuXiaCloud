@@ -29,6 +29,7 @@
         <module>wx-common-cache</module>
         <module>wx-common-datasource</module>
         <module>wx-common-locale</module>
+        <module>wx-common-rocketmq</module>
     </modules>
 
 

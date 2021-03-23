@@ -11,11 +11,14 @@ import com.wx.wxceshi.service.UserService;
 import com.wx.wxcommoncore.api.system.RemoteSysUserService;
 import com.wx.wxcommoncore.support.http.HttpCode;
 import com.wx.wxcommondatasource.base.BaseController;
+import com.wx.wxcommonrocketmq.event.StringMsgEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cloud.bus.ServiceMatcher;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
@@ -124,4 +127,18 @@ public class CeShiController extends BaseController<UserService,User> {
         boolean seata_group = configService.publishConfig("service.vgroupMapping.wx-system-seata-service-group", "SEATA_GROUP", "wx-seata-"+num);
         return setSuccessModelMap(seata_group);
     }
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
+
+    @Autowired
+    private ServiceMatcher serviceMatcher;
+
+    @GetMapping("/mq/{msg}")
+    public ResponseEntity<ModelMap> mq(@PathVariable("msg") String msg) {
+        applicationEventPublisher.publishEvent(new StringMsgEvent(this,serviceMatcher.getServiceId(),"wx-system:**",msg));
+        return setSuccessModelMap();
+    }
+
 }

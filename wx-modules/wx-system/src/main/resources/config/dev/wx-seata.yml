@@ -4,7 +4,7 @@ spring:
       seata: ${seata.enabled}
 #seata配置
 seata:
-  enabled: true
+  enabled: false
   config:
     type: nacos
     nacos:

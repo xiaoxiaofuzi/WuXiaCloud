@@ -144,6 +144,11 @@
         <dependencies>
             <dependency>
                 <groupId>com.wx</groupId>
+                <artifactId>wx-common-rocketmq</artifactId>
+                <version>${wx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wx</groupId>
                 <artifactId>wx-common-core</artifactId>
                 <version>${wx.version}</version>
             </dependency>

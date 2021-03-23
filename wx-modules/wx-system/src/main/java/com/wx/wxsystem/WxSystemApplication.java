@@ -1,12 +1,13 @@
 package com.wx.wxsystem;
 
 import com.wx.wxcommoncore.annotation.WxCloudApplication;
-import com.wx.wxcommoncore.utils.EnvironmentUtils;
+import com.wx.wxsystem.listener.StringMsgListener;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -26,5 +27,10 @@ public class WxSystemApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(WxSystemApplication.class, args);
+    }
+
+    @Bean
+    public StringMsgListener stringMsgListener(){
+        return new StringMsgListener();
     }
 }

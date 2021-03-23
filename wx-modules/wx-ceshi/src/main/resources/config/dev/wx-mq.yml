@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 10.200.1.27:9876
+    bus:
+      id: ${spring.application.name}:${server.port}

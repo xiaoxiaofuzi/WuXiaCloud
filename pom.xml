@@ -46,7 +46,7 @@
         <spring.cloud.alibaba.vserion>2.2.3.RELEASE</spring.cloud.alibaba.vserion>
         <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
         <!-- spring版本号 -->
-        <spring.version>5.2.8.RELEASE</spring.version>
+        <!--<spring.version>5.2.8.RELEASE</spring.version>-->
         <!--监控版本-->
         <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
         <!-- 数据库 -->

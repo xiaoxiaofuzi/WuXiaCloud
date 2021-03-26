@@ -53,8 +53,7 @@
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
-            <!--<version>${spring-boot-admin.version}</version>-->
-            <version>2.3.0</version>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
 
         <dependency>

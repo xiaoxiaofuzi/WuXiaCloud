@@ -3,7 +3,6 @@ package com.wx.wxcommoncore.support.interceptor;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,7 +14,6 @@ import java.util.Enumeration;
  *
  * @author ruoyi
  */
-@Component
 @Slf4j
 public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
@@ -31,7 +29,6 @@ public class FeignRequestInterceptor implements RequestInterceptor {
                     String values = request.getHeader(name);
                     requestTemplate.header(name, values);
                 }
-                log.info("feign interceptor header:{}", requestTemplate);
             }
         }
     }

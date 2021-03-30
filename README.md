@@ -11,3 +11,7 @@ zk节点管理wordId（临时文件缓存） 雪花算法获取
 
 
 
+转移到 gitee: https://gitee.com/fuziai/wx-cloud
+
+
+

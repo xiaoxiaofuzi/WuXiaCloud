@@ -47,5 +47,21 @@ public final class WxIdSequenceUtils {
 //
 //        System.out.println(simpleDateFormat.format(new Date(START_TIME)));
 
+
+        System.out.println("最大利润："+buySell(new int[]{8,1,6,11,5,15}));
+
+    }
+
+    private static int buySell(int[] ints) {
+        int max = 0;
+        int buy = ints[0];
+
+        for (int i = 1; i < ints.length; i++) {
+            buy = Math.min(buy,ints[i-1]);
+            max = Math.max(max,ints[i]-buy);
+        }
+
+
+        return max;
     }
 }

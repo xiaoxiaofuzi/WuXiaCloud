@@ -232,11 +232,21 @@ https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/appendix
 
 [组件版本关系](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
+
+
+## 毕业版本依赖关系(推荐使用)
+
+| Spring Cloud Version | Spring Cloud Alibaba Version | Spring Boot Version |
+| -------------------- | ---------------------------- | ------------------- |
+| Spring Cloud 2020.0  | 2020.0.RC1                   | 2.4.2.RELEASE       |
+
+
+
 当前使用：
 
-| Spring Cloud Alibaba Version | Sentinel Version | Nacos Version | Spring Cloud Version    | Spring Boot Version | Seata Version |
-| ---------------------------- | ---------------- | ------------- | ----------------------- | ------------------- | ------------- |
-| 2.2.4.RELEASE                | 1.8.0            | 1.4.1         | Spring Cloud Hoxton.SR8 | 2.3.2.RELEASE       | 1.3.0         |
+| Spring Cloud Alibaba Version | Sentinel Version | Nacos Version | Spring Cloud Version | Spring Boot Version | Seata Version |
+| ---------------------------- | ---------------- | ------------- | -------------------- | ------------------- | ------------- |
+| 2020.0.RC1                   | 1.8.0            | 1.4.1         | 2020.0.2             | 2.4.2               | 1.4.0         |
 
 ## Nacos Config
 
@@ -257,6 +267,10 @@ https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/appendix
 
 ```yaml
 spring:
+    #springboot 2.4 版本 加载配置改革了
+    config:
+      activate:
+        on-profile: ${spring.profiles.active}
     # 环境 dev|test|prod
     profiles:
       active: ${spring.profiles.active}
@@ -274,6 +288,32 @@ spring:
           shared-configs[0]:
            data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
 ```
+
+
+
+extension-configs 刷新属性
+
+```properties
+spring.application.name=opensource-service-provider
+spring.cloud.nacos.config.server-addr=127.0.0.1:8848
+
+# config external configuration
+# 1、Data Id 在默认的组 DEFAULT_GROUP,不支持配置的动态刷新
+spring.cloud.nacos.config.extension-configs[0].data-id=ext-config-common01.properties
+
+# 2、Data Id 不在默认的组，不支持动态刷新
+spring.cloud.nacos.config.extension-configs[1].data-id=ext-config-common02.properties
+spring.cloud.nacos.config.extension-configs[1].group=GLOBALE_GROUP
+
+# 3、Data Id 既不在默认的组，也支持动态刷新
+spring.cloud.nacos.config.extension-configs[2].data-id=ext-config-common03.properties
+spring.cloud.nacos.config.extension-configs[2].group=REFRESH_GROUP
+spring.cloud.nacos.config.extension-configs[2].refresh=true
+```
+
+
+
+
 
 ### 配置的优先级
 

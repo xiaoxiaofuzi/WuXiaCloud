@@ -1,15 +1,8 @@
 # Tomcat
 server:
     port: 8001
-    tomcat:
-        threads:
-          max: 1000
-          min-spare: 30
-#        connection-timeout: 20000
 
 spring:
-#    devtools:
-#      add-properties: false
     # 环境 dev|test|prod
     profiles:
       active: ${spring.profiles.active}
@@ -19,38 +12,33 @@ spring:
 #      lazy-initialization: true
     application:
       name: wx-gateway
-    redis:
-#      host: 127.0.0.1
-      host: 10.200.1.32
-      database: 10
-      # 配置使用Lettuce连接池
-      lettuce:
-         pool:
-           max-active: 8
-           max-idle: 8
-           min-idle: -1
-
     cloud:
       loadbalancer:
         ribbon:
           #替换成 Reactive 模式的负载均衡
           enabled: false
       nacos:
+        discovery:
+#          server-addr: 127.0.0.1:8848
+         server-addr: 10.200.1.27:8848
+         service: ${spring.application.name}
+#          metadata:
+#            user.name: "admin"
+#            user.password: "koala"
         config:
 #          server-addr: 127.0.0.1:8848
           server-addr: 10.200.1.27:8848
            # 配置文件格式
           file-extension: yml
-          extension-configs[0]:
-           data-id: ${spring.application.name}-test.${spring.cloud.nacos.config.file-extension}
-          shared-configs[0]:
-           data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-        discovery:
-#          server-addr: 127.0.0.1:8848
-           server-addr: 10.200.1.27:8848
-#          metadata:
-#            user.name: "admin"
-#            user.password: "koala"
+          extension-configs:
+            - data-id: ${spring.application.name}-test.${spring.cloud.nacos.config.file-extension}
+              refresh: true
+            - data-id: wx-gateway-cache.yml
+              refresh: true
+          shared-configs:
+            - data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+              refresh: true
+
       sentinel:
         # 取消控制台懒加载
         eager: true
@@ -72,13 +60,4 @@ spring:
               groupId: DEFAULT_GROUP
               data-type: json
               rule-type: flow
-
-logging:
-  config: classpath:logback-spring.xml
-  level:
-    dao: debug
-    org:
-      mybatis: debug
-
-
 

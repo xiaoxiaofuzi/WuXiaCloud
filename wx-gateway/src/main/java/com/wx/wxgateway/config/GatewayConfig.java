@@ -1,6 +1,5 @@
 package com.wx.wxgateway.config;
 
-import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 import com.wx.wxgateway.filter.WxAuthGlobalFilter;
 import com.wx.wxgateway.filterfactory.CeShiGatewayFilterFactory;
@@ -8,7 +7,6 @@ import com.wx.wxgateway.handel.GatewayExceptionHandler;
 import com.wx.wxgateway.handel.SentinelFallbackHandler;
 import com.wx.wxgateway.routepredicatefactory.RequestBodyRoutePredicateFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -58,12 +56,12 @@ public class GatewayConfig {
         return new WxAuthGlobalFilter();
     }
 
-
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public GlobalFilter sentinelGatewayFilter() {
-        return new SentinelGatewayFilter();
-    }
+/*此类在  SentinelSCGAutoConfiguration 中已经注册，无需再次注册*/
+//    @Bean
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
+//    public GlobalFilter sentinelGatewayFilter() {
+//        return new SentinelGatewayFilter();
+//    }
 
     //==== 自定义异常
 
